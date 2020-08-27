@@ -37,7 +37,7 @@ for i in range(len(my_list)):
     my_id = my_list[i]
     file.write((str(my_id)))
 
-file2 = open("output2.csv", "w", encoding="utf-8")
+file2 = open("../data_out/output2.csv", "w", encoding="utf-8")
 for i in range(len(my_list_2)):
     print(my_list_2[i])
     my_id2 = my_list_2[i]

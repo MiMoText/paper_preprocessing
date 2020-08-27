@@ -18,7 +18,7 @@ pos_tagged = nltk.pos_tag(tokens)
 ne_tagged = nltk.ne_chunk(pos_tagged)
 print(ne_tagged)
 
-file = open("../data_out/paper_nltk.csv", "w", encoding="utf-8")
+file = open("paper_nltk.csv", "w", encoding="utf-8")
 
 for word in ne_tagged:
     file.write(str(word) + "\n")

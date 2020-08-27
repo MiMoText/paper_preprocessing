@@ -1,10 +1,15 @@
 import spacy
 from spacy_langdetect import LanguageDetector
+
 # Skript zur Tokenisierung, Sprachbestimmung, POS-Tagging, NER
 # Ergebnisse: ziemlich gut. Erkennt auch ohne weiters Zutun mehrteilige Namen als Einheit
 # Noch keine Unterscheidung in deutsche und französische Textteile, bis jetzt rein deutsch
 # Info Spracherkennung: https://spacy.io/universe/project/spacy-langdetect
-
+#
+# Vorab einmal Download der Sprachmodelle notwendig. Danach können diese mit "load" geladen werden
+# python -m spacy download en_core_web_sm
+# python -m spacy download de_core_news_md
+# python -m spacy download fr_core_news_md
 
 def preprocessing():
 
@@ -19,8 +24,6 @@ def preprocessing():
     with open("../data_in/rieger.txt", encoding="utf-8") as file:
         text = file.read()
     # dem Text wird ein deutsches Sprachmodell zugewiesen
-    # --> wird gleich geändert, erst Spracherkennung, dann Sprachmodell de oder fr
-
     doc = nlp_de(text)
 
     # Bestimmung der Sprache auf Dokumentebene
@@ -51,7 +54,7 @@ def preprocessing():
 
     ##############################
     text_fr = []
-    file = open("../data_out/spacy_lfr.txt", "w", encoding="utf-8")
+    file = open("spacy_lfr.txt", "w", encoding="utf-8")
 
     for j, k in dict_fr.items():
         print("Text:", j)
@@ -59,7 +62,7 @@ def preprocessing():
         for m in k:
             print(m + ":", k[m])
 
-    file2 = open("../data_out/spacy_lde.txt", "w", encoding="utf-8")
+    file2 = open("spacy_lde.txt", "w", encoding="utf-8")
 
     for n, o in dict_de.items():
         print("Text:", n)
@@ -69,7 +72,7 @@ def preprocessing():
 # preprocessing()
 
 nlp_de = spacy.load("de_core_news_md")
-with open("../data_out/spacy_lde.txt", encoding="utf-8") as file:
+with open("spacy_lde.txt", encoding="utf-8") as file:
     text = file.read()
 
 doc = nlp_de(text)
@@ -86,7 +89,7 @@ for entity in doc.ents:
 # Was mache ich mit französischen Häppchen?
 
 
-file = open("../data_out/paper_spacy.csv", "w", encoding="utf-8")
+file = open("paper_spacy.csv", "w", encoding="utf-8")
 for entity in doc.ents:
     file.write(str(entity.text) + ",")
     file.write(str(entity.label_) + "\n")

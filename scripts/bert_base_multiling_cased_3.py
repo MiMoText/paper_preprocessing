@@ -28,7 +28,7 @@ my_list_2 = nlp(tokenized_text)
 print(my_list_2)
 
 
-file2 = open("output2.csv", "w", encoding="utf-8")
+file2 = open("../data_out/output2.csv", "w", encoding="utf-8")
 for i in range(len(my_list_2)):
     file2.write(str(my_list_2[i]))
     file2.write("\n")
